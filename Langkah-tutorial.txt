@@ -1,0 +1,7 @@
+cd DNN-HSMM   #
+wget http://hts.sp.nitech.ac.jp/archives/DNN-HSMM_demo-data/demo_data_English.tar.gz
+tar -zxvf demo_data_English.tar.gz
+cp demo_data_English/00_data.sh .  # mengcopy data
+cp demo_data_English/Config.py .
+bash 00_data.sh
+python 01_run.py
