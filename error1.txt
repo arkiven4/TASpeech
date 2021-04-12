@@ -38,3 +38,6 @@ Error ketika menggunakan terminal DNN-HMM-Master
 
 find: ‘delta’: No such file or directory
 
+Tambahan untuk lihat log 
+bash 00_data.sh
+make all 2>&1 | tee log_prepare_$NMFILE.txt
