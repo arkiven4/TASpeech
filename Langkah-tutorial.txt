@@ -1,7 +1,19 @@
-cd DNN-HSMM   #
-wget http://hts.sp.nitech.ac.jp/archives/DNN-HSMM_demo-data/demo_data_English.tar.gz
+cd DNN-HSMM   #masuk ke folder 
+wget http://hts.sp.nitech.ac.jp/archives/DNN-HSMM_demo-data/demo_data_English.tar.gz # Ekstrak database suara 
 tar -zxvf demo_data_English.tar.gz
 cp demo_data_English/00_data.sh .  # mengcopy data
 cp demo_data_English/Config.py .
+
+# Menyiapkan environment dulu
+export TOOLS_DIR=~/.hts_sptk
+export PATH=$TOOLS_DIR/bin:$PATH
+export PATH=$TOOLS_DIR/festival/bin:$PATH
+export PATH=$TOOLS_DIR/speech_tools/bin:$PATH
+export FESTVOXDIR=$TOOLS_DIR/festvox
+export FESTDIR=$TOOLS_DIR/festival
+export ESTDIR=$TOOLS_DIR/speech_tools
+export PATH=$FESTDIR/examples:$PATH
+
 bash 00_data.sh
+
 python 01_run.py
