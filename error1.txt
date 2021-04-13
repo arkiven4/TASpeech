@@ -1,4 +1,4 @@
-##Error ketika running shell pada terminal demo_data_English
+##Error 1
 
 find: ‘./demo_data_English/lab.trn’: No such file or directory
 find: ‘./demo_data_English/lab.test’: No such file or directory
@@ -34,9 +34,20 @@ find: ‘./demo_data_English/bap.trn’: No such file or directory
 find: ‘./demo_data_English/bap.trn’: No such file or directory
 python: can't open file 'data/scripts/serialization.py': [Errno 2] No such file or directory
 
-##Error ketika menggunakan terminal DNN-HMM-Master
-
+Error 2 
 find: ‘delta’: No such file or directory
+
+## TROUBLESHOOT UNTUK ERROR 1 DAN 2 
+Menambahkan envtools
+
+export TOOLS_DIR=~/.hts_sptk
+export PATH=$TOOLS_DIR/bin:$PATH
+export PATH=$TOOLS_DIR/festival/bin:$PATH
+export PATH=$TOOLS_DIR/speech_tools/bin:$PATH
+export FESTVOXDIR=$TOOLS_DIR/festvox
+export FESTDIR=$TOOLS_DIR/festival
+export ESTDIR=$TOOLS_DIR/speech_tools
+export PATH=$FESTDIR/examples:$PATH
 
 Tambahan untuk lihat log 
 bash 00_data.sh
