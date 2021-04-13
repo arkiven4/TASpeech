@@ -14,6 +14,6 @@ export FESTDIR=$TOOLS_DIR/festival
 export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 
-bash 00_data.sh
+bash 00_data.sh  # Menghasilkan file bap, lab, lf0, mgc
 
 python 01_run.py
