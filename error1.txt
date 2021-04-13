@@ -44,3 +44,6 @@ make all 2>&1 | tee log_prepare_$NMFILE.txt
 
 Error ketika run 01_run.py
 RuntimeError: CUDA driver initialization failed, you might not have a CUDA gpu.
+
+Cara mengecekjenis linux
+cat /etc/*-release
