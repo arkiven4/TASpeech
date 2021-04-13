@@ -1,0 +1,14 @@
+Rekap waktu running program ekspresif mbak elok 
+
+run_eks_again_again
+-80 marah: 290620190209 (tidaklengkap)
+-81 sedih: 29062019 0948 (lengkap)
+-82 bahagia: 29062019 1123 (tidak lengkap)
+-mix sintesis sedih 29062019 1138
+
+run_eks_happy: 28062019
+run_eksp_sad: 28062019 1824
+run
+run_ekspresif: 26062019 1822
+
+
