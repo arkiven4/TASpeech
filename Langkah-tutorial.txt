@@ -29,3 +29,11 @@ chmod a+x configure
 USEDNN=1
 
 DATASET=cmu_us_arctic SPEAKER=slt
+
+## Troubleshoot yang perlu dicoba 
+
+pacman -Ss cuda driver
+sudo pacman -S cuda driver
+
+download dari sini 
+http://developer.download.nvidia.com/compute/cuda/opensource/11.2.2/
