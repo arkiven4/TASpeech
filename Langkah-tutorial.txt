@@ -17,3 +17,15 @@ export PATH=$FESTDIR/examples:$PATH
 bash 00_data.sh  # Menghasilkan file bap, lab, lf0, mgc
 
 python 01_run.py
+
+##Mencoba adaptasi DNN
+
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+USEDNN=1
+
+DATASET=cmu_us_arctic SPEAKER=slt
