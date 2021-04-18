@@ -37,3 +37,5 @@ sudo pacman -S cuda driver
 
 download dari sini 
 http://developer.download.nvidia.com/compute/cuda/opensource/11.2.2/
+
+https://medium.com/@Soroush/installing-tensorflow-and-cuda-on-manjaro-linux-6cb64c5ece1e
