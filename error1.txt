@@ -61,6 +61,6 @@ cat /etc/*-release
 
 Cara cek python dan device: python cudnntes.py 2>/dev/null
 
-Error : Compilation failed in require at scripts/Training.pl line 57.
-
+Error Adapt DNN: Compilation failed in require at scripts/Training.pl line 57.
+troubleshoot: cek file config.pm line yg disebutkan saat error
 
