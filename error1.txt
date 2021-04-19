@@ -58,3 +58,6 @@ RuntimeError: CUDA driver initialization failed, you might not have a CUDA gpu.
 
 Cara mengecekjenis linux
 cat /etc/*-release
+
+Error : Compilation failed in require at scripts/Training.pl line 57.
+
