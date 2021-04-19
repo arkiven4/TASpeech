@@ -59,5 +59,8 @@ RuntimeError: CUDA driver initialization failed, you might not have a CUDA gpu.
 Cara mengecekjenis linux
 cat /etc/*-release
 
+Cara cek python dan device: python cudnntes.py 2>/dev/null
+
 Error : Compilation failed in require at scripts/Training.pl line 57.
+
 
