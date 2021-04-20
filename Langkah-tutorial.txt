@@ -26,8 +26,10 @@ chmod a+x configure
 --with-sptk-search-path=$TOOLS_DIR/bin \
 --with-hts-search-path=$TOOLS_DIR/bin \
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
-DATASET=vibid ADAPTSPKR=fena ADAPTHEAD=15
+DATASET=vibid ADAPTSPKR=fena ADAPTHEAD=15 TRAINSPKR=fala fbap meia mjra mmht
 USEDNN=1
+
+TRAINSPKR = nama database yang digunakan untuk training adaptasi
 
 DATASET=cmu_us_arctic SPEAKER=slt
 
