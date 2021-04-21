@@ -1,7 +1,6 @@
-for f in *.fa; do 
-  echo mv "$f" "${f%-*}.${f#*.}"
-done
+
+##Mengubah nama file dalam 1 folder
 
 for f in *.wav; do 
-  echo mv "$f" "vibid_$f"
+  mv "$f" "vibid_$f"
 done
