@@ -26,19 +26,58 @@ chmod a+x configure
 --with-sptk-search-path=$TOOLS_DIR/bin \
 --with-hts-search-path=$TOOLS_DIR/bin \
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
-DATASET=vibid ADAPTSPKR=fena ADAPTHEAD=15 TRAINSPKR=fala fbap meia mjra mmht
+DATASET=vibid ADAPTSPKR=fena 
+TRAINSPKR=fala fbap meia mjra mmht
+F0_RANGES=fala 130 600 fbap 190 530 fena 140 325 meia 80 260 mjra 75 300 mmht 70 160
 USEDNN=1
+
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+DATASET=vibid ADAPTSPKR=fena 
+TRAINSPKR=fala fbap fena meia mjra mmht
+USEDNN=1
+
+make all 2>&1 | tee log_prepare_$NMFILE.txt
+
 
 TRAINSPKR = nama database yang digunakan untuk training adaptasi
 
 DATASET=cmu_us_arctic SPEAKER=slt
 
-## Troubleshoot yang perlu dicoba 
+Coba HSMM
+chmod a+x configure
+./configure 
+--with-fest-search-path=/usr/local/festival/examples \
+--with-sptk-search-path=/usr/local/SPTK-3.1/bin \
+--with-hts-search-path=/usr/local/HTS-2.1_for_HTK-3.4/bin \
+--with-hts-engine-search-path=/usr/local/hts_engine_API-1.0/src/bin
+DATASET=vibid SPEAKER=fala
 
-pacman -Ss cuda driver
-sudo pacman -S cuda driver
+##Configure DNN dependent natural fala 
 
-download dari sini 
-http://developer.download.nvidia.com/compute/cuda/opensource/11.2.2/
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+DATASET=vibid SPEAKER=fala
+USEDNN=1
 
-https://medium.com/@Soroush/installing-tensorflow-and-cuda-on-manjaro-linux-6cb64c5ece1e
+##configure DNN dependent ekspresif
+
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=1 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=fyat
+USEDNN=1
