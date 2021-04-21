@@ -4,3 +4,15 @@
 for f in *.wav; do 
   mv "$f" "vibid_$f"
 done
+
+import os
+
+path = os.chdir("directori")
+
+i = 0
+for file in os.listdir(path):
+  
+  new_file_name = "vibid_fena_{}.txt".format(1)
+  os.rename(file, new_file_name)
+  
+  i = i +1
