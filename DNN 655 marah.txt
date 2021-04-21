@@ -25,10 +25,14 @@ NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=fyat
 USEDNN=1
-
+  
 # Prepare
 make all 2>&1 | tee log_prepare_$NMFILE.txt
 
 # Sintesis
+scriptpath=$(pwd)
+perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
+
+make all 2>&1 | tee log_prepare_$NMFILE.txt
 scriptpath=$(pwd)
 perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
