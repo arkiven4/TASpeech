@@ -1,0 +1,1 @@
+rename -n 's/-GOWN33_multiplemap//' *fa
