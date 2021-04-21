@@ -1,1 +1,7 @@
-rename -n 's/-GOWN33_multiplemap//' *fa
+for f in *.fa; do 
+  echo mv "$f" "${f%-*}.${f#*.}"
+done
+
+for f in *.wav; do 
+  echo mv "$f" "vibid_$f"
+done
