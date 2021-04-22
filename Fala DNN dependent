@@ -26,6 +26,9 @@ USEDNN=1
 # Prepare
 make all 2>&1 | tee log_prepare_$NMFILE.txt
 
+usednn diubah di config.pm
+Question belum ada
+
 # Sintesis
 scriptpath=$(pwd)
 perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
