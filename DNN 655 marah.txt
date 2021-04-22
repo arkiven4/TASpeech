@@ -36,3 +36,7 @@ perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_
 make all 2>&1 | tee log_prepare_$NMFILE.txt
 scriptpath=$(pwd)
 perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
+
+Percobaan kedua : Marah_6552
+Mengubah usednn dari config.pm
+
