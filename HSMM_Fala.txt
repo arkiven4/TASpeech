@@ -1,0 +1,34 @@
+Percobaan natural HSMM dengan mengubah parameter generation algorithm
+
+# Menyiapkan environment 
+export TOOLS_DIR=~/.hts_sptk
+export PATH=$TOOLS_DIR/bin:$PATH
+export PATH=$TOOLS_DIR/festival/bin:$PATH
+export PATH=$TOOLS_DIR/speech_tools/bin:$PATH
+export FESTVOXDIR=$TOOLS_DIR/festvox
+export FESTDIR=$TOOLS_DIR/festival
+export ESTDIR=$TOOLS_DIR/speech_tools
+export PATH=$FESTDIR/examples:$PATH
+
+# Log waktu running
+export NMFILE="$(date +'%d%m%Y_%H%M')"
+
+##Configure
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+DATASET=vibid SPEAKER=fala
+
+Sebelum prepare data ubah isi config.pm bagian parameter generation = 2 
+
+# Prepare
+make all 2>&1 | tee log_prepare_$NMFILE.txt
+
+Sebelum sintesis cek file question apakah bisa diubah 
+
+# Sintesis
+scriptpath=$(pwd)
+perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
