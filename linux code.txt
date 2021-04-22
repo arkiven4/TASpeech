@@ -5,6 +5,13 @@ for f in *.wav; do
   mv "$f" "vibid_$f"
 done
 
+for f in *.utt; do 
+  mv "$f" "vibid_$f"
+done
+
+
+
+
 import os
 
 path = os.chdir("directori")
