@@ -43,4 +43,7 @@ Bahagia 2 ada error tapi tetap menghasilkan suara
 Bahagia 3: question dibuat sendiri diawal, usednn melalui configure = sudah running sampai sintesis
 Bahagia 4: question dibuat sendiri diawal, usednn melalui config.pm dataio.py sdh coba diedit = sudah running sampai sintesis
 
+NameError: name 'ConfigParser' is not defined
+toubelshoot: ubah yang belum jadi configparser
 
+Masih error d dataIO.py
