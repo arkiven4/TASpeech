@@ -1,42 +1,44 @@
 
+export TOOLS_DIR=~/.hts_sptk
+export PATH=$TOOLS_DIR/bin:$PATH
+export PATH=$TOOLS_DIR/festival/bin:$PATH
+export PATH=$TOOLS_DIR/speech_tools/bin:$PATH
+export FESTVOXDIR=$TOOLS_DIR/festvox
+export FESTDIR=$TOOLS_DIR/festival
+export ESTDIR=$TOOLS_DIR/speech_tools
+export PATH=$FESTDIR/examples:$PATH
 
 Mengubah raw to short
-for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/Percobaanshort/${i//.raw/.short}; done
+for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/mgcepmarah/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
-for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/Percobaanshort/${i//.short/.pitch}; done
+for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/mgcepmarah/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
-mcep -l 512 -m 20 -a 0.42 > /home/viblab/BillyCoba/Percobaanshort/${i//.short/.mcep}; done
+mcep -l 512 -m 20 -a 0.42 > /home/viblab/BillyCoba/mgcepmarah/${i//.short/.mcep}; done
 
 Membuat file lpc
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400|\
-lpc -l 400 -m 20 > /home/viblab/BillyCoba/Percobaanshort/${i//.short/.lpc}; done
+lpc -l 400 -m 20 > /home/viblab/BillyCoba/mgcepmarah/${i//.short/.lpc}; done
 
 membuat file mgcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512 |\
-mgcep -m 20 -a 0.42 -c 2 -l 512 > /home/viblab/BillyCoba/Percobaanshort/${i//.short/.mgcep}; done
+mgcep -m 20 -a 0.42 -c 2 -l 512 > /home/viblab/BillyCoba/mgcepmarah/${i//.short/.mgcep}; done
 
+Gambar mgcep
+bcut +f -n 20 -s 10 -e 135 < vibid_fyat_212.mgcep |\
+mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_212.eps
+
+bcut +f -n 20 -s 10 -e 135 < vibid_fyat_213.mgcep |\
+mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_213.eps
+
+bcut +f -n 20 -s 10 -e 135 < vibid_fyat_263.mgcep |\
+mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_263.eps
+
+Yang masih error: 
 Mencoba menggambar pitch 
-for i in *.pitch; do fdrw -y 0 250 -W 1.5 -H 0.4 < $i | psgr > figure.esp
-
-bcut +f -n 20 -s 10 -e 135 < vibid_fyat_001.mcep |\
-mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > figure.esp
-
-Gambar mcep 
-for i in *.mcep; do bcut +f -n 20 -s 10 -e 135 < $i |\ 
-mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > vibid_fyat_001.esp
-
-bcut +f -n 20 -s 10 -e 135 < vibid_fyat_001.mgcep |\
-mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | xgr 
-
-bcut +f -n 20 -s 10 -e 135 < vibid_fyat_002.mgcep |\
-mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_002mgcep.esp
-
-bcut +f -n 20 -s 10 -e 135 < vibid_fyat_001.mcep |\
-mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_001mcep.esp
-
+for i in *.pitch; do fdrw -y 0 250 -W 1.5 -H 0.4 < $i | xgr
 
 Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan directori file yang mau dieksekusi
 
