@@ -51,7 +51,7 @@ Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan director
 ##Cara menghitung MCD dari hasil sintesis
 Dijalankan di folder file suara asli dengan menggunakan directori suara sintesis
 direc pertama isi hasil sintesis direct kedua isi tempat simpan nilai mcd
-for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/655Bahagidnn/${i/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/655Bahagiadnn/mcd/${i//.mcep/.txt}; done
+for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/Sedihdnn/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/Sedihdnn/mcd/${i//.mcep/.txt}; done
 
-for i in *.pitch; do rmse $i /home/viblab/BillyCoba/mgcepbahagiahmm/${i//vibid_mmht/vibid_mmht_vibid_mmht} | dmp +f > /home/viblab/BillyCoba/mgcepasli/rmse/${i//.pitch/.txt};done
+for i in *.pitch; do rmse $i /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/pitch/${i//vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/rmse/${i//.pitch/.txt};done
 
