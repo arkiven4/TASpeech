@@ -9,7 +9,7 @@ export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 
 Mengubah raw to short
-for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/mgcepsedihhmm/${i//.raw/.short}; done
+for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/mgcepasli/short/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
 for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/mgcepsedihhmm/${i//.short/.pitch}; done
@@ -25,6 +25,10 @@ lpc -l 400 -m 20 > /home/viblab/BillyCoba/mgcepsedihhmm/${i//.short/.lpc}; done
 membuat file mgcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512 |\
 mgcep -m 20 -a 0.42 -c 2 -l 512 > /home/viblab/BillyCoba/mgcepsedihhmm/${i//.short/.mgcep}; done
+
+Gambar mcep
+bcut +f -n 20 -s 10 -e 135 < vibid_fyat_001.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > vibid_fyat_001coba.eps
 
 Gambar mgcep
 bcut +f -n 20 -s 10 -e 135 < vibid_fyat_421.mgcep |\
@@ -42,4 +46,9 @@ Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan director
 Dijalankan di folder file suara asli dengan menggunakan directori suara sintesis
 for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/mgcepbahagiahmm/${i//vibid_mmht/vibid_mmht_vibid_mmht} | dmp +f > /home/viblab/BillyCoba/mgcepbahagiahmm/${i//.mcep/.txt}; done
 
+for i in *.mcep; do bcut +f -n 20 -s 10 -e 135 < $i |\ 
+gc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | 
+xgr > /home/viblab/BillyCoba/mgcepasli/mcep/${i//.mcep/.esp}; done
 
+bcut +f -n 20 -s 10 -e 135 < vibid_fyat_001.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > vibid_fyat_001coba.eps
