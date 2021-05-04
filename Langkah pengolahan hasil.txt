@@ -36,9 +36,10 @@ mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_422.e
 bcut +f -n 20 -s 10 -e 135 < vibid_fyat_423.mgcep |\
 mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_423.eps
 
-Yang masih error: 
-Mencoba menggambar pitch 
-for i in *.pitch; do fdrw -y 0 250 -W 1.5 -H 0.4 < $i | xgr
-
 Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan directori file yang mau dieksekusi
+
+##Cara menghitung MCD dari hasil sintesis
+Dijalankan di folder file suara asli dengan menggunakan directori suara sintesis
+for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/mgcepbahagiahmm/${i//vibid_mmht/vibid_mmht_vibid_mmht} | dmp +f > /home/viblab/BillyCoba/mgcepbahagiahmm/${i//.mcep/.txt}; done
+
 
