@@ -19,8 +19,18 @@ chmod a+x configure
 --with-sptk-search-path=$TOOLS_DIR/bin \
 --with-hts-search-path=$TOOLS_DIR/bin \
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
+USEDNN=1
 SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=1 \
-DATASET=vibid ADAPTSPKR=mmht ADAPTHEAD=15 TRAINSPKR='fala fbap fena meia mjra' F0_RANGES='fala 130 600 fbap 190 530 fena 140 325 meia 80 260 mjra 75 300 mmht 70 160' USED
+DATASET=vibid ADAPTSPKR=mmht ADAPTHEAD=15 TRAINSPKR='fala fbap fena meia mjra' F0_RANGES='fala 130 600 fbap 190 530 fena 140 325 meia 80 260 mjra 75 300 mmht 70 160' USEDNN=1
+
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=1 \
+DATASET=vibid ADAPTSPKR=mmht ADAPTHEAD=15 TRAINSPKR='fala fbap fena meia mjra' F0_RANGES='fala 130 600 fbap 190 530 fena 140 325 meia 80 260 mjra 75 300 mmht 70 160'
  
 # Prepare
 make all 2>&1 | tee log_prepare_$NMFILE.txt
