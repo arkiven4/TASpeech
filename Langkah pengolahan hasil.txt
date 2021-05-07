@@ -9,32 +9,32 @@ export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 
 Mengubah raw to short
-for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/Cobaobjektif/655Sedihhmm/short/${i//.raw/.short}; done
+for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/short/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
-for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/pitch/${i//.short/.pitch}; done
+for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/pitch/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
-mcep -l 512 -m 20 -a 0.42 > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/mcep/${i//.short/.mcep}; done
+mcep -l 512 -m 20 -a 0.42 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcep/${i//.short/.mcep}; done
 
 Membuat file lpc
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400|\
-lpc -l 400 -m 20 > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/lpc/${i//.short/.lpc}; done
+lpc -l 400 -m 20 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/lpc/${i//.short/.lpc}; done
 
 membuat file mgcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512 |\
-mgcep -m 20 -a 0.42 -c 2 -l 512 > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/mgcep/${i//.short/.mgcep}; done
+mgcep -m 20 -a 0.42 -c 2 -l 512 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mgcep/${i//.short/.mgcep}; done
 
 Gambar mcep
 cd mcep
 for i in *.mcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
-mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/mcep/$i.eps; done
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcep/$i.eps; done
 cd ..
 
 Gambar mgcep
 for i in *.mgcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
-mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/mgcep/$i.eps; done
+mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mgcep/$i.eps; done
 
 bcut +f -n 20 -s 10 -e 135 < vibid_fyat_422.mgcep |\
 mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_422.eps
@@ -51,7 +51,9 @@ Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan director
 ##Cara menghitung MCD dari hasil sintesis
 Dijalankan di folder file suara asli dengan menggunakan directori suara sintesis
 direc pertama isi hasil sintesis direct kedua isi tempat simpan nilai mcd
-for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/Sedihdnn/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/Sedihdnn/mcd/${i//.mcep/.txt}; done
+for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/Sedihdaem/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/Sedihdaem/mcd/${i//.mcep/.txt}; done
+
+for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcd/${i//.mcep/.txt}; done
 
 for i in *.pitch; do rmse $i /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/pitch/${i//vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/655Marahhmm/rmse/${i//.pitch/.txt};done
 
