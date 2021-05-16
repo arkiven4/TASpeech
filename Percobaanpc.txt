@@ -1,0 +1,5 @@
+Yang perlu dilakukan dengan pc speech 
+
+-Mencoba memplot hasil mgc dari preparation hts 
+-cobain python ini https://github.com/tuanad121/Python-WORLD
+
