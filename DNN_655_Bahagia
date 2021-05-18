@@ -61,3 +61,27 @@ MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=fyat
 USESTRAIGHT=1
 USEDNN=1
+
+bahagia 12
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=600 FRAMESHIFT=5 WINDOWTYPE=1 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=fyat DAEM=1 ACTIVATION=3
+
+bahagia13
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=25 FRAMESHIFT=5 WINDOWTYPE=0 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=fyat DAEM=1
