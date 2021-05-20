@@ -3,3 +3,5 @@ Yang perlu dilakukan dengan pc speech
 -Mencoba memplot hasil mgc dari preparation hts 
 -cobain python ini https://github.com/tuanad121/Python-WORLD
 http://www.cs.columbia.edu/~ecooper/tts/data.html
+-Coba ganti format mgcep menjadi mgc
+
