@@ -62,232 +62,30 @@ chmod a+x configure
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
 DATASET=vibid ADAPTSPKR=mmht ADAPTHEAD=15
 
+[ADAPT 3]
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=1 \
+DATASET=vibid ADAPTSPKR=mmht ADAPTHEAD=15 TRAINSPKR='fala fbap fena meia mjra' F0_RANGES='fala 130 600 fbap 190 530 fena 140 325 meia 80 260 mjra 75 300 mmht 70 160' DAEM=1
+
 `configure' configures HTS-demo_CMU-ARCTIC-ADAPT 2.3.2 to adapt to many kinds of systems.
 
 Usage: ./configure [OPTION]... [VAR=VALUE]...
 
-To assign environment variables (e.g., CC, CFLAGS...), specify them as
-VAR=VALUE.  See below for descriptions of some of the useful variables.
 
-Defaults for the options are specified in brackets.
-
-Configuration:
-  -h, --help              display this help and exit
-      --help=short        display options specific to this package
-      --help=recursive    display the short help of all the included packages
-  -V, --version           display version information and exit
-  -q, --quiet, --silent   do not print `checking ...' messages
-      --cache-file=FILE   cache test results in FILE [disabled]
-  -C, --config-cache      alias for `--cache-file=config.cache'
-  -n, --no-create         do not create output files
-      --srcdir=DIR        find the sources in DIR [configure dir or `..']
-
-Installation directories:
-  --prefix=PREFIX         install architecture-independent files in PREFIX
-                          [/usr/local]
-  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
-                          [PREFIX]
-
-By default, `make install' will install all the files in
-`/usr/local/bin', `/usr/local/lib' etc.  You can specify
-an installation prefix other than `/usr/local' using `--prefix',
-for instance `--prefix=$HOME'.
-
-For better control, use the options below.
-
-Fine tuning of the installation directories:
-  --bindir=DIR            user executables [EPREFIX/bin]
-  --sbindir=DIR           system admin executables [EPREFIX/sbin]
-  --libexecdir=DIR        program executables [EPREFIX/libexec]
-  --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
-  --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
-  --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
-  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
-  --libdir=DIR            object code libraries [EPREFIX/lib]
-  --includedir=DIR        C header files [PREFIX/include]
-  --oldincludedir=DIR     C header files for non-gcc [/usr/include]
-  --datarootdir=DIR       read-only arch.-independent data root [PREFIX/share]
-  --datadir=DIR           read-only architecture-independent data [DATAROOTDIR]
-  --infodir=DIR           info documentation [DATAROOTDIR/info]
-  --localedir=DIR         locale-dependent data [DATAROOTDIR/locale]
-  --mandir=DIR            man documentation [DATAROOTDIR/man]
-  --docdir=DIR            documentation root
-                          [DATAROOTDIR/doc/hts-demo_cmu-arctic-adapt]
-  --htmldir=DIR           html documentation [DOCDIR]
-  --dvidir=DIR            dvi documentation [DOCDIR]
-  --pdfdir=DIR            pdf documentation [DOCDIR]
-  --psdir=DIR             ps documentation [DOCDIR]
-
-Optional Packages:
-  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
-  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-fest-search-path specify the additional festival search path
-  --with-sptk-search-path specify the additional SPTK binary search path
-  --with-matlab-search-path
-                          specify the additional MATLAB binary search path
-  --with-straight-path    specify the STRAIGHT MATLAB code path
-  --with-hts-search-path  specify the additional HTS binary search path
-  --with-hts-engine-search-path
-                          specify the additional hts_engine binary search path
-
-Some influential environment variables:
-  FULLCONTEXT_FORMAT
-              full context label format (default=HTS_TTS_ENG)
-  FULLCONTEXT_VERSION
-              version of full context label format (default=1.0)
-  DATASET     dataset (default=cmu_us_arctic)
-  TRAINSPKR   speakers for training (default='bdl clb jmk rms')
-  ADAPTSPKR   speakers for adaptation (default=slt)
-  ADAPTHEAD   file name header for adaptation data (default=b05)
-  VER         version number of this setting (default=1)
-  QNAME       question set name (default=en_US.talk)
-  USEUTT      generate labels from utt files instead of text files (0:off or
-              1:on, default=1)
-  USESTRAIGHT turn on STRAIGHT-based analysis (0:off or 1:on, default=0)
-  FRAMELEN    frame length in point (default=1200)
-  FRAMESHIFT  frame shift in point (default=240)
-  WINDOWTYPE  window type -> 0: Blackman 1: Hamming 2: Hanning (default=1)
-  NORMALIZE   normalization -> 0: none 1: by power 2: by magnitude (default=1)
-  SAMPFREQ    sampling frequency in Hz (default=48000)
-  FFTLEN      FFT length in point (default=2048)
-  FREQWARP    frequency warping factor (default=0.55)
-  GAMMA       pole/zero weight factor (0: mel-cepstral analysis 1: LPC
-              analysis 2,3,...,N: mel-generalized cepstral (MGC) analysis)
-              (default=0)
-  MGCORDER    order of MGC analysis (default=34 for cepstral form, default=12
-              for LSP form)
-  BAPORDER    order of BAP analysis (default=24)
-  LNGAIN      use logarithmic gain instead of linear gain (default=1)
-  PSTFILTER_MCP
-              postfiltering factor for mel-cepstral (default=1.4)
-  PSTFILTER_LSP
-              postfiltering factor for LSP (default=0.7)
-  IMPLEN      length of impulse response (default=4096 for cepstral form,
-              default=576 for LSP form)
-  F0_RANGES   F0 search ranges (spkr1 lower1 upper1 spkr2 lower2 upper2...).
-              Order of speakers in F0_RANGES should be equal to that in
-              ALLSPKR (default='bdl 40 210 clb 130 260 jmk 50 180 rms 40 200
-              slt 110 280')
-  NMGCWIN     number of delta windows for MGC coefficients (default=3)
-  NLF0WIN     number of delta windows for log F0 values (default=3)
-  NBAPWIN     number of delta windows for band aperiodicity values (default=3)
-  NSTATE      number of HMM states (default=5)
-  NITER       number of iterations of embedded training (default=5)
-  WFLOOR      mixture weight flooring scale (default=5000)
-  DAEM        DAEM algorithm for parameter estimation (0:off or 1:on,
-              default=0)
-  DAEMNITER   number of iterations of DAEM-based embedded training
-              (default=10)
-  DAEMALPHA   schedule of updating temperature parameter for DAEM
-              (default=1.0)
-  MAXDEV      maximum duration scaling factor (default=10)
-  MINDUR      minimum duration to be evaluated (default=5)
-  NMGCTRANSBLK
-              number of blocks for MGC transforms (default=3)
-  NLF0TRANSBLK
-              number of blocks for log F0 transforms (default=1)
-  NBAPTRANSBLK
-              number of blocks for band aperiodicity transforms (default=3)
-  MGCBANDWIDTH
-              band width for MGC transforms (default=35 for cepstral form,
-              derault=2 for LSP form)
-  LF0BANDWIDTH
-              band width for log F0 transforms (default=1)
-  BAPBANDWIDTH
-              band width for band aperiodicity transforms (default=25)
-  TREEKIND    regression class tree kind (dec: decision tree, reg: regression
-              tree, default=dec)
-  SATTREEKIND regression class tree kind for SAT (dec: decision tree, reg:
-              regression tree, default=dec)
-  TRANSKIND   adaptation transform kind (mean: MLLRMEAN, cov: MLLRCOV, feat:
-              CMLLR, default=feat)
-  DECMGCOCCTHRESH
-              occupancy threshold for regression classes of MGC stream
-              (default=500.0)
-  DECLF0OCCTHRESH
-              occupancy threshold for regression classes of log F0 streams
-              (default=100.0)
-  DECBAPOCCTHRESH
-              occupancy threshold for regression classes of band aperiodicity
-              streams (default=100.0)
-  DECDUROCCTHRESH
-              occupancy threshold for regression classes of duration models
-              (default=50.0)
-  MGCOCCTHRESH
-              occupancy threshold to adapt MGC stream (default=500.0)
-  LF0OCCTHRESH
-              occupancy threshold to adapt log F0 streams (default=100.0)
-  BAPOCCTHRESH
-              occupancy threshold to adapt band aperiodicity streams
-              (default=100.0)
-  DUROCCTHRESH
-              occupancy threshold to adapt duration models (default=50.0)
-  SATMGCOCCTHRESH
-              occupancy threshold for adaptive training of MGC stream
-              (default=10000.0)
-  SATLF0OCCTHRESH
-              occupancy threshold for adaptive training of log F0 streams
-              (default=2000.0)
-  SATBAPOCCTHRESH
-              occupancy threshold for adaptive training of band aperiodicity
-              streams (default=2000.0)
-  SATDUROCCTHRESH
-              occupancy threshold for adaptive training of duration models
-              (default=5000.0)
-  NUMADAPT    number of adaption transform reestimation iterations (default=3)
-  NUMSAT      number of speaker adaptive training iterations (default=3)
-  CMPBIAS     use bias for MLLRMEAN/CMLLR adaptation (cmp) (default=TRUE)
-  DURBIAS     use bias for MLLRMEAN/CMLLR adaptation (dur) (default=TRUE)
-  USEDCOV     use diagonal covariance transform for MLLRMEAN (default=FALSE)
-  USEMAPLR    use MAPLR adaptation for MLLRMEAN/CMLLR (default=TRUE)
-  USEVBLR     use VBLR adaptation for MLLRMEAN (default=FALSE)
-  USESTRUCTURALPRIOR
-              use structural prior for MAPLR/VBLR with regression class tree
-              (default=TRUE)
-  PRIORSCALE  hyper-parameter for SMAPLR/SVBLR adaptation (default=1.0)
-  ADDMAP      add MAP adaptation after MLLR adaptation (default=1)
-  CMPMAPTAU   hyper-parameter for MAP adaptation (default=50.0)
-  DURMAPTAU   hyper-parameter for MAP adaptation (default=50.0)
-  PGTYPE      type of speech parameter generation algorithm (0: Cholesky, 1:
-              MixHidden, 2: StateHidden, default=0)
-  MAXEMITER   max EM iteration (default=20)
-  EMEPSILON   convergence factor for EM iteration (default=0.0001)
-  USEHMMGV    turn on GV-based parameter generation algorithm (0:off or 1:on,
-              default=1)
-  MAXGVITER   maximum number of iterations of GV-based parameter generation
-              algorithm (default=50)
-  GVEPSILON   convergence factor for GV iteration (default=0.0001)
-  MINEUCNORM  minimum Euclid norm for GV iteration (default=0.01)
-  STEPINIT    initial step size (default=1.0)
-  STEPINC     step size acceleration factor (default=1.2)
-  STEPDEC     step size deceleration factor (default=0.5)
-  HMMWEIGHT   weight for HMM output prob. (default=1.0)
-  GVWEIGHT    weight for GV output prob. (default=1.0)
-  OPTKIND     optimization method (STEEPEST, NEWTON, or LBFGS)
-              (default=NEWTON)
-  NOSILGV     turn on GV without silent and pause phoneme (0:off or 1:on,
-              default=1)
-  CDGV        turn on context-dependent GV (0:off or 1:on, default=1)
-  USEDNN      use deep neural network as acoustic model (0:off or 1:on,
-              default=0)
-  NHIDDENUNITS
-              number of hidden units in each layer (1st 2nd 3rd ...)
-              (default='2048 2048 2048 2048 2048')
-  ACTIVATION  activation function for hidden units -> 0: Linear 1: Sigmoid 2:
-              Tanh 3: ReLU (default=1)
-  OPTIMIZER   optimizer -> 0: SGD 1: Momentum 2: AdaGrad 3: AdaDelta 4: Adam
-              5: RMSprop (default=4)
-  LEARNRATE   learning rate (default=0.001)
-  KEEPPROB    probability for not randomly setting activities to zero
-              (default=0.5)
-  QUEUESIZE   queue size (default=10000)
-  BATCHSIZE   mini-batch size (default=512)
-  NEPOCH      number of epochs for training (default=100)
-  NADAPTEPOCH number of epochs for training (default=50)
-  NTHREAD     number of threads (0:unlimited, default=0)
-  RANDOMSEED  random seed for initialization (default=12345)
-
-Use these variables to override the choices made by `configure' or to help
-it to find libraries and programs with nonstandard names/locations.
 
 Report bugs to <hts-users@sp.nitech.ac.jp>.
+
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+USEDNN=1
+SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=1 \
+DATASET=vibid ADAPTSPKR=mmht ADAPTHEAD=15 TRAINSPKR='fala fbap fena meia mjra' F0_RANGES='fala 130 600 fbap 190 530 fena 140 325 meia 80 260 mjra 75 300 mmht 70 160' USEDNN=1
