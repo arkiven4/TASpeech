@@ -95,7 +95,22 @@ chmod a+x configure
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
 --with-matlab-search-path=/usr/local/matlab/bin \
 --with-straight-path=/usr/local/STRAIGHTV40 \
-SAMPFREQ=16000 FRAMELEN=25 FRAMESHIFT=5 WINDOWTYPE=0 \
+SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=0 \
 NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=fyat USESTRAIGHT=1
+
+BAHAGIA 15: MENCOBA PAKAI DATA NATURAL
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+--with-matlab-search-path=/usr/local/matlab/bin \
+--with-straight-path=/usr/local/STRAIGHTV40 \
+SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=0 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=fyat
+
