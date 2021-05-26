@@ -9,10 +9,10 @@ export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 
 Mengubah raw to short
-for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/short/${i//.raw/.short}; done
+for i in *.raw; do x2x +s $i > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/mgcep/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
-for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/pitch/${i//.short/.pitch}; done
+for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/mgcep/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
