@@ -9,6 +9,7 @@ export FESTVOXDIR=$TOOLS_DIR/festvox
 export FESTDIR=$TOOLS_DIR/festival
 export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
+export NMFILE="$(date +'%d%m%Y_%H%M')"
 
 # Log waktu running
 export NMFILE="$(date +'%d%m%Y_%H%M')"
