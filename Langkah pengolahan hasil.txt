@@ -9,14 +9,14 @@ export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 
 Mengubah raw to short
-for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMBahagia227/short/${i//.raw/.short}; done
+for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMSedih214/short/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
 for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/mgcep/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
-mcep -l 512 -m 20 -a 0.42 > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMBahagia227/mcep/${i//.short/.mcep}; done
+mcep -l 512 -m 20 -a 0.42 > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMSedih214/mcep/${i//.short/.mcep}; done
 
 Membuat file lpc
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400|\
@@ -24,18 +24,18 @@ lpc -l 400 -m 20 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/lpc/${i//.short
 
 membuat file mgcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512 |\
-mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMBahagia227/mgcep/${i//.short/.mgcep}; done
+mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMSedih214/mgcep/${i//.short/.mgcep}; done
 
 Gambar mcep
 cd mcep
 for i in *.mcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
-mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcep/$i.eps; done
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/Bahagia14ulang2/data/coba/$i.eps; done
 cd ..
 
 Gambar mgcep
 
 for i in *.mgcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
-mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > /run/media/viblab/Markov1/Billy/Progress1/HasilHMMBahagia227/mgcep/$i.eps; done
+mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/Bahagia14ulang2/data/coba/$i.eps; done
 
 bcut +f -n 20 -s 10 -e 135 < vibid_fyat_422.mgcep |\
 mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_422.eps
@@ -47,12 +47,13 @@ Gambar pitch (masih belum bisa)
 for i in *.pitch; do fdrw -y 0 250 -W 1.5 -H 0.4 < $i | 
 psgr > /home/viblab/BillyCoba/mgcepasli/mcep/$i.eps; done
 
-Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan directori file yang mau dieksekusi
+Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan directori file tempat menyimpan hasil. Semua printah dijalankan didalam folder yang terdapat file yang akan dieksekusi
 
 ##Cara menghitung MCD dari hasil sintesis
 Dijalankan di folder file suara asli dengan menggunakan directori suara sintesis
 direc pertama isi hasil sintesis direct kedua isi tempat simpan nilai mcd
-for i in *.mcep; do cdist -m 15 $i /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMBahagia227/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMBahagia227/mcd/${i//.mcep/.txt}; done
+
+for i in *.mcep; do cdist -m 15 $i /run/media/viblab/Markov1/Billy/Progress1/HasilDAEMSedih214/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > //run/media/viblab/Markov1/Billy/Progress1/HasilDAEMSedih214/mcd/${i//.mcep/.txt}; done
 
 for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcd/${i//.mcep/.txt}; done
 
