@@ -24,7 +24,7 @@ lpc -l 400 -m 20 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/lpc/${i//.short
 
 membuat file mgcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512 |\
-mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/HasilHMMBahagia+natural/mgcep/${i//.short/.mgcep}; done
+mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/objektif_straight/${i//.short/.mgcep}; done
 
 Gambar mcep
 cd mcep
@@ -35,7 +35,7 @@ cd ..
 Gambar mgcep
 
 for i in *.mgcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
-mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/Bahagia14ulang2/data/coba/$i.eps; done
+mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > /run/media/viblab/Markov1/Billy/objektif_straight/$i.eps; done
 
 bcut +f -n 20 -s 10 -e 135 < vibid_fyat_422.mgcep |\
 mgc2sp -m 20 -a 0.42 -c 2 -l 512 | grlogsp -l 512 -x 8 | psgr > vibid_fyat_422.eps
