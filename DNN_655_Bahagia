@@ -29,11 +29,13 @@ DATASET=vibid SPEAKER=fyat USEDNN=1 ACTIVATION=3
 File config.pm diubah pada bagian usednn = 1 
   
 # Prepare
+sed -i "45s#all: data voce#all: data#"Makefile
 make all 2>&1 | tee log_prepare_$NMFILE.txt
 
 Cek apakah bisa ganti question
 
 # Sintesis
+sed -i "45s#all: data voce#all: data#"Makefile
 make all 2>&1 | tee log_prepare_$NMFILE.txt
 scriptpath=$(pwd)
 perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
