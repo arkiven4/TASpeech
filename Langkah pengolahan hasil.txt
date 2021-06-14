@@ -9,14 +9,14 @@ export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 
 Mengubah raw to short
-for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/HasilHMMBahagia+natural/short/${i//.raw/.short}; done
+  for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/Percobaan_13jun/ekspresifmbakelok/short/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
 for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /home/viblab/BillyCoba/DNN_Ekspresif_dependent/mgcep/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
-mcep -l 512 -m 20 -a 0.42 > /run/media/viblab/Markov1/Billy/HasilHMMBahagia+natural/mcep/${i//.short/.mcep}; done
+mcep -l 512 -m 20 -a 0.42 > /run/media/viblab/Markov1/Billy/Percobaan_13jun/ekspresifmbakelok/mcep/${i//.short/.mcep}; done
 
 Membuat file lpc
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400|\
@@ -24,7 +24,7 @@ lpc -l 400 -m 20 > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/lpc/${i//.short
 
 membuat file mgcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512 |\
-mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/objektif_straight/${i//.short/.mgcep}; done
+mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/Percobaan_13jun/mgcep/${i//.short/.mgcep}; done
 
 Gambar mcep
 cd mcep
@@ -53,7 +53,7 @@ Catatan: /home/viblab/BillyCoba/Percobaanshort/ -- diubah sesuai dengan director
 Dijalankan di folder file suara asli dengan menggunakan directori suara sintesis
 direc pertama isi hasil sintesis direct kedua isi tempat simpan nilai mcd
 
-for i in *.mcep; do cdist -m 15 $i /run/media/viblab/Markov1/Billy/HasilHMMBahagia+natural/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /run/media/viblab/Markov1/Billy/HasilHMMBahagia+natural/mcd/${i//.mcep/.txt}; done
+for i in *.mcep; do cdist -m 15 $i /run/media/viblab/Markov1/Billy/Percobaan_13jun/ekspresifmbakelok/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /run/media/viblab/Markov1/Billy/Percobaan_13jun/ekspresifmbakelok/mcd/${i//.mcep/.txt}; done
 
 for i in *.mcep; do cdist -m 15 $i /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcep/${i/vibid_fyat/vibid_fyat} | dmp +f > /home/viblab/BillyCoba/Cobaobjektif/Marahdaem/mcd/${i//.mcep/.txt}; done
 
