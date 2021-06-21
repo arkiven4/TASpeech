@@ -1,0 +1,42 @@
+Menjalankan sintesis untuk tanpa feature dan dengan fitur-fitur yang coba ditambahkan 
+-Sudah menggunakan hlist
+
+# Menyiapkan environment 
+export TOOLS_DIR=~/.hts_sptk
+export PATH=$TOOLS_DIR/bin:$PATH
+export PATH=$TOOLS_DIR/festival/bin:$PATH
+export PATH=$TOOLS_DIR/speech_tools/bin:$PATH
+export FESTVOXDIR=$TOOLS_DIR/festvox
+export FESTDIR=$TOOLS_DIR/festival
+export ESTDIR=$TOOLS_DIR/speech_tools
+export PATH=$FESTDIR/examples:$PATH
+export NMFILE="$(date +'%d%m%Y_%H%M')"
+
+sed -i "45s#all: data voce#all: data#"Makefile
+make all 2>&1 | tee log_prepare_$NMFILE.txt
+scriptpath=$(pwd)
+perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
+
+1. Running Ekspresi murni HMM tanpa DAEM (bahagia5coba)
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=600 FRAMESHIFT=80 WINDOWTYPE=1 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=fyat 
+
+2. (bahagiacoba2) Mencoba pakai question bahasa indonesia
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=600 FRAMESHIFT=80 WINDOWTYPE=1 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=fyat QNAME=qst001
