@@ -64,3 +64,68 @@ SAMPFREQ=16000 FRAMELEN=600 FRAMESHIFT=80 WINDOWTYPE=1 \
 NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=fyat DAEM=1
+
+Modified for HTS
+
+USAGE: HERest [options] hmmList [durList] dataFiles...
+
+ Option                                       Default
+
+ -a      Use an input linear transform for hmms            off
+ -b      Use an input linear transform for dur models      off
+ -c f    Mixture pruning threshold            10.0
+ -d s    dir to find hmm definitions          current
+ -e      use model alignment from label for pruning        off
+ -f s    extension for new duration model files            as src
+ -g s    output duration model to file s                   none
+ -h s    set output speaker name pattern   *.%%%
+         to s, optionally set input and parent patterns
+ -k f    set temperature parameter for DAEM training       1.0
+ -l N    set max files per speaker            off
+ -m N    set min examples needed per model    3
+ -n s    dir to find duration model definitions            current
+ -o s    extension for new hmm files          as src
+ -p N    set parallel mode to N               off
+ -q s    Save all xforms for duration to TMF file s        TMF
+ -r      Enable Single Pass Training...       
+         ...using two parameterisations       off
+ -s s    print statistics to file s           off
+ -t f [i l] set pruning to f [inc limit]      inf
+ -u tmvwapsd update t)rans m)eans v)ars w)ghts             tmvw
+                a)daptation xform p)rior used     
+                s)semi-tied xform                 
+                d) switch to duration model update flag    
+ -v f    set minimum variance to f            0.0
+ -w f    set mix weight floor to f*MINMIX     0.0
+ -y s    extension for duration model files                none
+ -x s    extension for hmm files              none
+ -z s    Save all xforms to TMF file s        TMF
+ -A      Print command line arguments         off
+ -B      Save HMMs/transforms as binary       off
+ -C cf   Set config file to cf                default
+ -D      Display configuration variables      off
+ -E s [s] set dir for parent xform to s       off
+         and optional extension                 
+ -F fmt  Set source data format to fmt        as config
+ -G fmt  Set source label format to fmt       as config
+ -H mmf  Load HMM macro file mmf
+ -I mlf  Load master label file mlf
+ -J s [s] set dir for input xform to s        none
+         and optional extension                 
+ -K s [s] set dir for output xform to s       none
+         and optional extension                 
+ -L dir  Set input label (or net) dir         current
+ -M dir  Dir to write HMM macro files         current
+ -N mmf  Load duration macro file mmf
+ -R dir  Dir to write duration macro files                 current
+ -S f    Set script file to f                 none
+ -T N    Set trace flags to N                 0
+ -V      Print version information            off
+ -W s [s] set dir for duration parent xform to s           off
+         and optional extension                 
+ -X ext  Set input label (or net) file ext    lab
+ -Y s [s] set dir for duration input xform to s            none
+         and optional extension                            
+ -Z s [s] set dir for duration output xform to s           none
+         and optional extension                            
+
