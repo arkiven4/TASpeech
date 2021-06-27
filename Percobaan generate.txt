@@ -1,0 +1,91 @@
+Generate sp + formant
+# Extracting features from raw audio
+mkdir -p mgc lf0 bap
+SAMPKHZ=`echo 16000    | /home/viblab/.hts_sptk/bin/x2x +af | /home/viblab/.hts_sptk/bin/sopr -m 0.001 | /home/viblab/.hts_sptk/bin/x2x +fa`; \
+for raw in data/raw/vibid_fyat_*.raw; do \
+	base=`basename ${raw} .raw`; \
+	min=`/home/viblab/.hts_sptk/bin/x2x +sf ${raw} | /home/viblab/.hts_sptk/bin/minmax | /home/viblab/.hts_sptk/bin/x2x +fa | head -n 1`; \
+	max=`/home/viblab/.hts_sptk/bin/x2x +sf ${raw} | /home/viblab/.hts_sptk/bin/minmax | /home/viblab/.hts_sptk/bin/x2x +fa | tail -n 1`; \
+	if [ -s ${raw} -a ${min} -gt -32768 -a ${max} -lt 32767 ]; then \
+		echo "Extracting features from ${raw}"; \
+		if [ 1 -eq 0 ]; then \
+			/home/viblab/.hts_sptk/bin/x2x +sf ${raw} | /home/viblab/.hts_sptk/bin/pitch -H 600     -L 75     -p 80  -s ${SAMPKHZ} -o 2 > lf0/${base}.lf0; \
+			if [ 1       -eq 0 ]; then \
+				/home/viblab/.hts_sptk/bin/x2x +sf ${raw} | \
+				/home/viblab/.hts_sptk/bin/frame -l 400    -p 80  | \
+				/home/viblab/.hts_sptk/bin/window -l 400    -L 1024      -w 0  -n 1   | \
+				/home/viblab/.hts_sptk/bin/mgcep -a 0.42    -m 24    -l 1024      -e 1.0E-08 > mgc/${base}.mgc; \
+			else \
+				if [ 1      -eq 1 ]; then \
+					GAINOPT="-L"; \
+				fi; \
+				/home/viblab/.hts_sptk/bin/x2x +sf ${raw} | \
+				/home/viblab/.hts_sptk/bin/frame -l 400    -p 80  | \
+				/home/viblab/.hts_sptk/bin/window -l 400    -L 1024      -w 0  -n 1   | \
+				/home/viblab/.hts_sptk/bin/mgcep -a 0.42    -c 1       -m 24    -l 1024      -e 1.0E-08 -o 4 | \
+				/home/viblab/.hts_sptk/bin/lpc2lsp -m 24    -s ${SAMPKHZ} ${GAINOPT} -n 1024      -p 8 -d 1.0E-08 > mgc/${base}.mgc; \
+			fi; \
+			if [ -n "`/home/viblab/.hts_sptk/bin/nan lf0/${base}.lf0`" ]; then \
+				echo " Failed to extract features from ${raw}"; \
+				rm -f lf0/${base}.lf0; \
+			fi; \
+			if [ -n "`/home/viblab/.hts_sptk/bin/nan mgc/${base}.mgc`" ]; then \
+				echo " Failed to extract features from ${raw}"; \
+				rm -f mgc/${base}.mgc; \
+			fi; \
+		else \
+			FRAMESHIFTMS=`echo 80  | /home/viblab/.hts_sptk/bin/x2x +af | /home/viblab/.hts_sptk/bin/sopr -m 1000 -d 16000    | /home/viblab/.hts_sptk/bin/x2x +fa`; \
+			/home/viblab/.hts_sptk/bin/raw2wav -s ${SAMPKHZ} -d . ${raw}; \
+			echo "path(path,'/home/viblab/STRAIGHTV40');"                    >  ${base}.m; \
+			echo "prm.F0frameUpdateInterval=${FRAMESHIFTMS};"  >> ${base}.m; \
+			echo "prm.F0searchUpperBound=600    ;"           >> ${base}.m; \
+			echo "prm.F0searchLowerBound=75    ;"           >> ${base}.m; \
+			echo "prm.spectralUpdateInterval=${FRAMESHIFTMS};" >> ${base}.m; \
+			echo "[x,fs]=audioread('${base}.wav');"              >> ${base}.m; \
+			echo "[f0,ap] = exstraightsource(x,fs,prm);"        >> ${base}.m; \
+			echo "[sp1] = exstraightspec(x,f0,fs,prm); f1 = f0*2; f2= f1*2;"          >> ${base}.m; \ 
+			echo "ap = ap'; fi = conv2(sp1,f1,'same'); sp = conv2(fi,f2,'same'); "                                    >> ${base}.m; \ 
+			echo "sp1 = sp1';"                                    >> ${base}.m; \
+			echo "sp1 = sp1*32768.0;"                             >> ${base}.m; \
+			echo "save '${base}.f0' f0 -ascii;"                >> ${base}.m; \
+			echo "save '${base}.ap' ap -ascii;"                >> ${base}.m; \
+			echo "save '${base}.sp' sp -ascii;"                >> ${base}.m; \
+			echo "quit;"                                        >> ${base}.m; \
+			/usr/bin/matlab -nodisplay -nosplash -nojvm < ${base}.m; \
+			if [ -s ${base}.f0 ]; then \
+				/home/viblab/.hts_sptk/bin/x2x +af ${base}.f0 | /home/viblab/.hts_sptk/bin/sopr -magic 0.0 -LN -MAGIC -1.0E+10 > lf0/${base}.lf0; \
+				if [ -n "`/home/viblab/.hts_sptk/bin/nan lf0/${base}.lf0`" ]; then \
+					echo " Failed to extract features from ${raw}"; \
+					rm -f lf0/${base}.lf0; \
+				fi; \
+			fi; \
+			if [ -s ${base}.sp ]; then \
+				if [ 1       -eq 0 ]; then \
+					/home/viblab/.hts_sptk/bin/x2x +af ${base}.sp | \
+					/home/viblab/.hts_sptk/bin/mgcep -a 0.42    -m 24    -l 1024      -e 1.0E-08 -j 0 -f 0.0 -q 3 > mgc/${base}.mgc; \
+				else \
+					if [ 1      -eq 1 ]; then \
+						GAINOPT="-L"; \
+					fi; \
+					/home/viblab/.hts_sptk/bin/x2x +af ${base}.sp | \
+					/home/viblab/.hts_sptk/bin/mgcep -a 0.42    -c 1       -m 24    -l 1024      -e 1.0E-08 -j 0 -f 0.0 -q 3 -o 4 | \
+					/home/viblab/.hts_sptk/bin/lpc2lsp -m 24    -s ${SAMPKHZ} ${GAINOPT} -n 1024      -p 8 -d 1.0E-08 > mgc/${base}.mgc; \
+				fi; \
+				if [ -n "`/home/viblab/.hts_sptk/bin/nan mgc/${base}.mgc`" ]; then \
+					echo " Failed to extract features from ${raw}"; \
+					rm -f mgc/${base}.mgc; \
+				fi; \
+			fi; \
+			if [ -s ${base}.ap ]; then \
+				/home/viblab/.hts_sptk/bin/x2x +af ${base}.ap | \
+				/home/viblab/.hts_sptk/bin/mgcep -a 0.42    -m 24    -l 1024      -e 1.0E-08 -j 0 -f 0.0 -q 1 > bap/${base}.bap; \
+				if [ -n "`/home/viblab/.hts_sptk/bin/nan bap/${base}.bap`" ]; then \
+					echo " Failed to extract features from ${raw}"; \
+					rm -f bap/${base}.bap; \
+				fi; \
+			fi; \
+			rm -f ${base}.m ${base}.wav ${base}.f0 ${base}.ap ${base}.sp; \
+		fi; \
+	fi; \
+done 
+
