@@ -1,0 +1,3 @@
+Langkah perhitungan nilai MCD dengan Dynamic Time Wrapping 
+
+MCD DTW, which uses dynamic time warping (DTW) to compute the minimum MCD obtainable by "aligning" the two sequences. This metric does not penalize differences in the timing between natural and synthetic speech, which is often desirable.
