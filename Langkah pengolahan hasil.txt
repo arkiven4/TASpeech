@@ -12,7 +12,7 @@ Mengubah wav to raw
 for i in `ls *.wav`;do
 fname=$(echo $i | cut -f 1 -d '.')
 wav2raw +s $fname.wav
-mv *.wav /home/viblab/BillyCoba/Percobaan_laki-laki/Bahagia3/gen/ver1/stc/0/raw/
+mv *.wav /home/viblab/BillyCoba/Percobaan_laki-laki/Sedih2/gen/ver1/stc/0/raw2/
 mv *.raw /home/viblab/BillyCoba/Percobaan_laki-laki/Bahagia3/gen/ver1/stc/0/raw/
 done
 
