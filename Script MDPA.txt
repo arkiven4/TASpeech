@@ -1,3 +1,4 @@
+script shell untuk proses persiapan dan training database MDPA
 
 # Menyiapkan environment 
 export TOOLS_DIR=~/.hts_sptk
@@ -10,14 +11,8 @@ export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
 export NMFILE="$(date +'%d%m%Y_%H%M')"
 
-Preparation dan Sintesis
-
-sed -i "45s#all: data voce#all: data#"Makefile
-make all 2>&1 | tee log_prepare_$NMFILE.txt
-scriptpath=$(pwd)
-perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
-
 # Membuat configure
+1. Konfigur skema HMM
 chmod a+x configure
 ./configure \
 --with-fest-search-path=$TOOLS_DIR/festival/examples \
@@ -27,10 +22,9 @@ chmod a+x configure
 SAMPFREQ=16000 FRAMELEN=600 FRAMESHIFT=80 WINDOWTYPE=1 \
 NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
-DATASET=vibid SPEAKER=mdpa DAEM=1
+DATASET=vibid SPEAKER=mdpa 
 
-STRAIGHT
-
+2. Konfigur skema HMM + fitur prosodi
 chmod a+x configure
 ./configure \
 --with-fest-search-path=$TOOLS_DIR/festival/examples \
@@ -43,6 +37,7 @@ NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=mdpa USESTRAIGHT=1 
 
+3. Konfigur skema HMM DAEM + fitur prosodi
 chmod a+x configure
 ./configure \
 --with-fest-search-path=$TOOLS_DIR/festival/examples \
@@ -54,3 +49,9 @@ SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=0 \
 NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=mdpa USESTRAIGHT=1 DAEM=1
+
+#Preparation dan Sintesis
+sed -i "45s#all: data voce#all: data#"Makefile
+make all 2>&1 | tee log_prepare_$NMFILE.txt
+scriptpath=$(pwd)
+perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
