@@ -20,7 +20,7 @@ chmod a+x configure
 --with-sptk-search-path=$TOOLS_DIR/bin \
 --with-hts-search-path=$TOOLS_DIR/bin \
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
-DATASET=vibid SPEAKER=fala
+SAMPFREQ=16000 DATASET=vibid SPEAKER=mmht DAEM=1
 USEDNN=1
 
 # Prepare
