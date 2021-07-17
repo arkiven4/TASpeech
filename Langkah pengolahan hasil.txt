@@ -21,7 +21,7 @@ Mengubah raw to short
   for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/Percobaan_laki-laki/Hasil_sedih3/short/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
-for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /run/media/viblab/Markov1/Billy/Percobaan_laki-laki/Hasil_bahagia2/pitch/${i//.short/.pitch}; done
+for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /run/media/viblab/Markov1/Billy/Hasil_Gabungan/fyat/hasil_bahagiahmm/pitch/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
@@ -37,8 +37,35 @@ mgcep -m 20 -a 0.42 -c 2 -l 512 > /run/media/viblab/Markov1/Billy/Percobaan_13ju
 
 Gambar mcep
 cd mcep
+for i in *.mcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > /run/media/viblab/Markov1/Billy/Hasil_objektif_asli/mdpa/Sedihasli/mcep/$i.eps; done
+cd ..
 
+Gambar spektrum fix
+for file in *.short; 
+do x2x +sf < $file | frame -l 400 -p 80 | bcut +f -l 400 -s 65 -e 65 | window -l 400 -L 512 | spec -l 512 | 
+glogsp -l 512 -x 8 -p 2 ;\
+\
+bcut +f -n 20 -s 65 -e 65 < ${file%.short}.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 | psgr > ${file%.short}ceps.eps
+done
+------------------------------------------------
 
+------------------
+for file in *.short; 
+do gwave +s $file | psgr > ${file%.short}.eps
+
+for file in *.pitch;
+do fdrw < $file | psgr > ${file%.pitch}pitch.eps
+---------------------------
+x2x +sf < vibid_fyat_008.short | frame -l 400 -p 80 | \
+bcut +f -l 400 -s 65 -e 65 |\
+window -l 400 -L 512 | spec -l 512 |\
+glogsp -l 512 -x 8 -p 2 ;\
+\
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_008.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 | xgr
+psgr > /run/media/viblab/Markov1/Billy/Hasil_objektif_asli/Sedihasli/mcep/spektrum/$i.eps; done
 
 export TOOLS_DIR=~/.hts_sptk
 export PATH=$TOOLS_DIR/bin:$PATH
@@ -48,9 +75,8 @@ export FESTVOXDIR=$TOOLS_DIR/festvox
 export FESTDIR=$TOOLS_DIR/festival
 export ESTDIR=$TOOLS_DIR/speech_tools
 export PATH=$FESTDIR/examples:$PATH
-for i in *.mcep; do bcut +f -n 20 -s 10 -e 135 < $i |\
-mgc2sp -m 20 -a 0.42 -g 0 -l 512 | grlogsp -l 512 -x 8 -t | psgr > /run/media/viblab/Markov1/Billy/Hasil_objektif_asli/mdpa/Sedihasli/mcep/$i.eps; done
-cd ..
+
+
 
 Gambar mgcep
 
