@@ -9,8 +9,15 @@ for f in *.utt; do
   mv "$f" "vibid_$f"
 done
 
+export DATANAME=${DATASET}_${SPEAKER}
+rm $DATANAME.txt
+touch $DATANAME.txt
+for i in `ls *.txt`;do
+export TEXT=$(cat $i)
+echo $TEXT >> ../$DATANAME.txt
+done
 
-
+python2 text2prompt.py vibid_mmht.txt txt.done.data vibid_mmht 4
 
 import os
 
