@@ -20,7 +20,7 @@ chmod a+x configure
 --with-sptk-search-path=$TOOLS_DIR/bin \
 --with-hts-search-path=$TOOLS_DIR/bin \
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
-SAMPFREQ=16000 DATASET=vibid SPEAKER=mmht DAEM=1
+SAMPFREQ=16000 DATASET=vibid SPEAKER=fala DAEM=1
 USEDNN=1
 
 # Prepare
@@ -30,6 +30,7 @@ usednn diubah di config.pm
 Question belum ada
 
 # Sintesis
+sed -i "45s#all: data voce#all: data#"Makefile
 make all 2>&1 | tee log_prepare_$NMFILE.txt
 scriptpath=$(pwd)
 perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
