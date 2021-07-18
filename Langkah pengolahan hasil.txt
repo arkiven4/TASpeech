@@ -1,3 +1,13 @@
+chmod a+x configure
+./configure \
+--with-fest-search-path=$TOOLS_DIR/festival/examples \
+--with-sptk-search-path=$TOOLS_DIR/bin \
+--with-hts-search-path=$TOOLS_DIR/bin \
+--with-hts-engine-search-path=$TOOLS_DIR/bin \
+SAMPFREQ=16000 FRAMELEN=600 FRAMESHIFT=80 WINDOWTYPE=1 \
+NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
+DATASET=vibid SPEAKER=mdpa DAEM=1
 
 export TOOLS_DIR=~/.hts_sptk
 export PATH=$TOOLS_DIR/bin:$PATH
@@ -18,14 +28,14 @@ done
 
 
 Mengubah raw to short
-  for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/Percobaan_laki-laki/Hasil_sedih3/short/${i//.raw/.short}; done
+  for i in *.raw; do x2x +s $i > /run/media/viblab/Markov1/Billy/Hasil_objektif_asli/fyat/Marahasli/short/${i//.raw/.short}; done
 
 Mengubah short menjadi pitch
 for i in *.short; do x2x +sf $i | pitch -a 1 -s 16 -p 80 -L 65 -H 120 > /run/media/viblab/Markov1/Billy/Hasil_Gabungan/fyat/hasil_bahagiahmm/pitch/${i//.short/.pitch}; done
 
 Membuat file mcep
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400 -L 512|\
-mcep -l 512 -m 20 -a 0.42 > /run/media/viblab/Markov1/Billy/Percobaan_laki-laki/Hasil_sedih3/mcep/${i//.short/.mcep}; done
+mcep -l 512 -m 20 -a 0.42 > /run/media/viblab/Markov1/Billy/Hasil_objektif_asli/fyat/Marahasli/mcep/${i//.short/.mcep}; done
 
 Membuat file lpc
 for i in *.short; do x2x +sf < $i | frame -l 400 -p 80 | window -l 400|\
@@ -50,7 +60,13 @@ bcut +f -n 20 -s 65 -e 65 < ${file%.short}.mcep |\
 mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 | psgr > ${file%.short}ceps.eps
 done
 ------------------------------------------------
-
+for file in *.short; 
+do x2x +sf < $file | frame -l 400 -p 80 | bcut +f -l 400 -s 65 -e 65 | window -l 400 -L 512 | spec -l 512 | 
+glogsp -l 512 -x 8 -p 2 ;\
+\
+bcut +f -n 20 -s 65 -e 65 < ${file%.short}.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 2 | psgr > ${file%.short}ceps.eps
+done
 ------------------
 for file in *.short; 
 do gwave +s $file | psgr > ${file%.short}.eps
