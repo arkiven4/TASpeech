@@ -54,7 +54,7 @@ NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
 MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 \
 DATASET=vibid SPEAKER=fyat USESTRAIGHT=1 DAEM=1
 
-3. Konfitur skema HMM IFAS
+4. Konfitur skema HMM IFAS
 chmod a+x configure
 ./configure \
 --with-fest-search-path=$TOOLS_DIR/festival/examples \
@@ -62,10 +62,10 @@ chmod a+x configure
 --with-hts-search-path=$TOOLS_DIR/bin \
 --with-hts-engine-search-path=$TOOLS_DIR/bin \
 --with-matlab-search-path=/usr/local/matlab/bin \
---with-ifas-path=/home/arkiven4/TA/IFAS \
+--with-ifas-path=/home/viblab/IFAS \
 SAMPFREQ=16000 FRAMELEN=400 FRAMESHIFT=80 WINDOWTYPE=1 \
 NORMALIZE=1 FFTLEN=1024 FREQWARP=0.42 GAMMA=1 \
-MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 IFASWINDOW=512 \
+MGCORDER=24 LNGAIN=1 LOWERF0=75 UPPERF0=600 IFASWINDOW=1024 \
 DATASET=vibid SPEAKER=fyat USEIFAS=1
 
 # Prepare & Sintesis
