@@ -26,7 +26,18 @@ glogsp -l 512 -x 8 -p 2 ;\
 bcut +f -n 20 -s 65 -e 65 < ${file%.short}.mcep |\
 mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 | psgr > ${file%.short}ceps.eps
 done
+###########################################
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_original.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 1 | psgr > vibid_fyat_001_original_ceps.eps
 
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_campuran.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 2 | psgr > vibid_fyat_001_campuran_ceps.eps
+
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_maximum.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 3 | psgr > vibid_fyat_001_maximum_ceps.eps
+
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_minimum.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 4 | psgr > vibid_fyat_001_minimum_ceps.eps
 ###########################################
 
 for i in *.pitch;
