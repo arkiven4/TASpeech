@@ -43,3 +43,21 @@ mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 4 | psgr > vibid_fyat_
 for i in *.pitch;
 do fdrw -y 0 250 -W 1.5 -H 0.4 < $i | psgr > ./$i_pitch.eps;
 done
+
+===============================================
+Plot Hold on Log dB
+
+( x2x +sf < vibid_fyat_001_campuran.short | frame -l 400 -p 80 | bcut +f -l 400 -s 65 -e 65 | window -l 400 -L 512 | spec -l 512 | 
+glogsp -l 512 -x 8 -p 1 ;\
+\
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_campuran.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 5 -p 3 -c "(a) Judul Plot";\
+\
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_maximum.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 5 -p 5 ) | psgr > campuran.eps
+======================================
+( bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_campuran.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 5 -p 3 -c "(a) Judul Plot";\
+\
+bcut +f -n 20 -s 65 -e 65 < vibid_fyat_001_maximum.mcep |\
+mgc2sp -m 20 -a 0.42 -g 0 -l 512 | glogsp -l 512 -x 8 -ln 5 -p 5 ) | psgr > campuran.eps
