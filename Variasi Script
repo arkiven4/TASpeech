@@ -1,0 +1,2 @@
+$HMGenS        = "$HMGENS    -A -B -C $cfg{'syn'} -D -T 1 -m                                                   -t $beam ";
+Model ADuration Aligment
