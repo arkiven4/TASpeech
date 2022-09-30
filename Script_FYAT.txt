@@ -75,3 +75,6 @@ make all 2>&1 | tee log_prepare_$NMFILE.txt
 scriptpath=$(pwd)
 perl scripts/Training.pl $scriptpath/scripts/Config.pm 2>&1 | tee log_synthesis_$NMFILE.txt
 python3.8 run_mcd.py
+
+
+{'FRAMELEN': 400, 'FRAMESHIFT': 80, 'WINDOWTYPE': 1, 'NORMALIZE': 1, 'FFTLEN': 2048, 'FREQWARP': 0.55, 'GAMMA': 1, 'MGCORDER': 39, 'LNGAIN': 1, 'IFASWINDOW': 512, 'PGTYPE': 1, 'NSTATE': 5, 'NITER': 21, 'MAXDEV': 12, 'MINDUR': 4, 'MAXEMITER': 40, 'EMEPSILON': 0.0001, 'MAXGVITER': 125, 'GVEPSILON': 0.0001, 'HMMWEIGHT': 1.0, 'GVWEIGHT': 1.0, 'NOSILGV': 1}
