@@ -8,6 +8,7 @@ export PATH=$TOOLS_DIR/speech_tools/bin:$PATH
 export FESTVOXDIR=$TOOLS_DIR/festvox
 export FESTDIR=$TOOLS_DIR/festival
 export ESTDIR=$TOOLS_DIR/speech_tools
+export FLITEDIR=$TOOLS_DIR/flite-2.0.0-release
 export PATH=$FESTDIR/examples:$PATH
 export NMFILE="$(date +'%d%m%Y_%H%M')"
 
